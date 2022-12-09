@@ -9,7 +9,7 @@ class SummaryRangesTest {
 
     // Map input to expected output
     private val testData = listOf(
-        // intArrayOf(-2147483648,-2147483647,2147483647) to listOf("-2147483648->2147483647"),
+        intArrayOf(-2147483648,-2147483647,2147483647) to listOf("-2147483648->-2147483647","2147483647"),
         intArrayOf(0, 1, 2, 4, 5, 7) to listOf("0->2","4->5","7"),
         intArrayOf(0,2,3,4,6,8,9) to listOf("0","2->4","6","8->9"),
         intArrayOf(0,1,2,4,5,7,20) to listOf("0->2","4->5","7","20"),

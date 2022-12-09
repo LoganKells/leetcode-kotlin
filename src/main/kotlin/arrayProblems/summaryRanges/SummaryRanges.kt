@@ -1,4 +1,5 @@
 package arrayProblems.summaryRanges
+import kotlin.math.abs
 
 // Problem #228: https://leetcode.com/problems/summary-ranges/
 // Sliding window problem
@@ -25,13 +26,12 @@ class SummaryRanges {
         var left = 0
 
         // For loop over right pointer
+        var previousRightValue = nums[0]
         for (right in nums.indices) {
             val leftValue = nums[left]
             val rightValue = nums[right]
-            val currentRange = (leftValue.. rightValue).toList().toIntArray()
-            val currentWindow = nums.copyOfRange(left, right + 1)
 
-            if (!currentRange.contentEquals(currentWindow)) {
+            if (abs(rightValue - previousRightValue) > 1) {
                 if (leftValue == nums[right - 1]) {
                     solutionRanges.add("$leftValue")
                 } else {
@@ -41,10 +41,9 @@ class SummaryRanges {
                 // Move to a new range by finding a new left pointer.
                 // While left < right and condition is not met, iterate the left
                 // side of the range after removing left side value.
-                while (left < right) {
-                    left++
-                }
+                left = right
             }
+            previousRightValue = rightValue
         }
 
         if (left == nums.size - 1) {
